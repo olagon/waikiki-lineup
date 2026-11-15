@@ -45,3 +45,7 @@ Escape, or the Menu button, opens settings, where keys can be remapped.
 ## Assets
 
 Everything is generated in code except two elevation files from the USGS, which are public domain. See `ASSETS.md`. `ART.md` is the art direction.
+
+## Licence
+
+MIT. See `LICENSE`.
