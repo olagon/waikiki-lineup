@@ -1,0 +1,28 @@
+{
+  "name": "waikiki-surf",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "worker": "wrangler dev --port 8787",
+    "build": "vite build",
+    "preview": "vite build && wrangler dev --port 8787",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p worker",
+    "frames": "node tests/frames/capture.mjs"
+  },
+  "dependencies": {
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261115.1",
+    "@types/node": "26.6.6",
+    "@types/three": "0.187.0",
+    "playwright": "1.65.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0",
+    "wrangler": "4.162.0",
+    "ws": "8.23.0"
+  }
+}
