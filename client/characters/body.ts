@@ -43,13 +43,15 @@ export function buildBody(look: Look): THREE.BufferGeometry {
         si.push(w[0][0], w[1][0], 0, 0); sw.push(w[0][1] / t, w[1][1] / t, 0, 0);
       }
     });
-    // Rings must run bottom to top (or toward +x for tubes along x) for the faces to point outward.
-    const alongX = rings[0].axis === 'x'; // a ring around x turns the other way, so its faces wind the other way
+    // Faces must point outward whichever way the rings are listed. Arms and legs are listed top to bottom, and for
+    // years of this file's life that drew them inside out: you saw the far inner wall of every limb, lit backwards,
+    // and looked straight into the legs of the shorts. A ring around x also turns the other way from one around y.
+    const alongX = rings[0].axis === 'x', ax = alongX ? 0 : 1, rising = rings[rings.length - 1].c[ax] > rings[0].c[ax], turn = alongX === rising;
     for (let i = 0; i < rings.length - 1; i++) for (let k = 0; k < N; k++) {
       const a = base + i * N + k, c = base + i * N + ((k + 1) % N), d = a + N, e = c + N;
-      alongX ? idx.push(a, c, d, c, e, d) : idx.push(a, d, c, c, d, e);
+      turn ? idx.push(a, c, d, c, e, d) : idx.push(a, d, c, c, d, e);
     }
-    const cap = (ri: number, flip: boolean) => { const o = base + ri * N; for (let k = 1; k < N - 1; k++) flip !== alongX ? idx.push(o, o + k, o + k + 1) : idx.push(o, o + k + 1, o + k); };
+    const cap = (ri: number, flip: boolean) => { const o = base + ri * N; for (let k = 1; k < N - 1; k++) flip === turn ? idx.push(o, o + k, o + k + 1) : idx.push(o, o + k + 1, o + k); }; // end caps face away from the tube
     if (capStart) cap(0, false);
     if (capEnd) cap(rings.length - 1, true);
   };

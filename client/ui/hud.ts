@@ -2,7 +2,7 @@
 const el = (tag: string, css: string, parent: HTMLElement): HTMLElement => { const e = document.createElement(tag); e.style.cssText = css; parent.append(e); return e; };
 
 export class Hud {
-  private ring: SVGCircleElement; private cross: HTMLElement; private prompt: HTMLElement; private card: HTMLElement; private marker: HTMLElement;
+  private ring: SVGCircleElement; private cross: HTMLElement; private label: HTMLElement; private born = performance.now(); private prompt: HTMLElement; private card: HTMLElement; private marker: HTMLElement;
   private seen = new Set<string>(JSON.parse(localStorage.getItem('wl.seen') ?? '[]'));
   private promptUntil = 0;
 
@@ -12,6 +12,8 @@ export class Hud {
     this.ring = wrap.querySelector('#st') as SVGCircleElement;
     this.cross = el('div', 'position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:#e2574c;font:600 20px/1 ui-sans-serif,system-ui', wrap);
     this.cross.textContent = '+';
+    // The ring explains itself when it matters: for the first seconds in the water, and when it is nearly empty.
+    this.label = el('div', 'position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:2px;font-size:11px;letter-spacing:.06em;white-space:nowrap;opacity:0;transition:opacity .6s ease-out', wrap);
     const touch = matchMedia('(pointer: coarse)').matches; // on phones the prompt sits above the touch buttons
     this.prompt = el('div', `position:absolute;left:50%;bottom:${touch ? 150 : 92}px;`+'transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:rgba(8,30,40,.45);backdrop-filter:blur(16px);font-size:15px;letter-spacing:.02em;opacity:0;transition:opacity .24s ease-out;white-space:nowrap', root);
     this.card = el('div', 'position:absolute;right:max(24px,env(safe-area-inset-right));top:max(24px,env(safe-area-inset-top));padding:14px 18px;border-radius:14px;background:rgba(8,30,40,.45);backdrop-filter:blur(16px);opacity:0;transition:opacity .6s ease-out;text-align:right', root);
@@ -22,6 +24,9 @@ export class Hud {
     this.ring.style.strokeDashoffset = String(119.4 * (1 - Math.max(0, Math.min(1, v / 100))));
     this.ring.style.stroke = v <= 0 ? '#e2574c' : '#f4efe6';
     this.cross.style.display = cut ? 'flex' : 'none';
+    const low = v < 25;
+    this.label.textContent = low ? 'low stamina: sit up to rest' : 'stamina';
+    this.label.style.opacity = low || performance.now() - this.born < 15000 ? '1' : '0';
   }
 
   /** One line of help. With `once`, only ever shown the first time (first-session tutorial). */
