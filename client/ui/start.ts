@@ -54,10 +54,11 @@ export function showStart(o: StartOptions): { close(): void } {
     });
   });
   const more = button('Settings', PILL, row, () => openSettings());
+  const help = button('How to play', PILL, row, () => { location.href = '/how-to-play.html'; });
 
   // A quiet line of links: the About page, and where this came from.
   const foot = el('div', 'display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:16px;font-size:13px;opacity:.85;text-shadow:0 1px 12px rgba(4,18,24,.6)', col);
-  for (const [text, href] of [['About', '/about.html'], ['Open Source | Olin Lagon', 'https://olagon.github.io/'], ['GitHub', 'https://github.com/olagon/waikiki-lineup'], ['LinkedIn', 'https://www.linkedin.com/in/olinlagon']]) {
+  for (const [text, href] of [['How to play', '/how-to-play.html'], ['About', '/about.html'], ['Open Source | Olin Lagon', 'https://olagon.github.io/'], ['GitHub', 'https://github.com/olagon/waikiki-lineup'], ['LinkedIn', 'https://www.linkedin.com/in/olinlagon']]) {
     const a = el('a', 'pointer-events:auto;color:inherit;text-underline-offset:3px;text-decoration-color:rgba(244,239,230,.45)', foot, text) as HTMLAnchorElement;
     a.href = href;
     if (href.startsWith('http')) { a.target = '_blank'; a.rel = 'noopener'; }
@@ -68,7 +69,7 @@ export function showStart(o: StartOptions): { close(): void } {
     const narrow = innerWidth < 640, short = innerHeight < 520, side = narrow ? 16 : short ? 28 : 48, foot = narrow ? 24 : short ? 16 : 48;
     wrap.style.padding = `0 max(${side}px,env(safe-area-inset-right)) max(${foot}px,env(safe-area-inset-bottom)) max(${side}px,env(safe-area-inset-left))`;
     wrap.style.justifyContent = narrow ? 'center' : 'flex-start';
-    play.style.flex = narrow ? '1 1 100%' : '0 0 auto'; copy.style.flex = more.style.flex = narrow ? '1 1 0' : '0 0 auto';
+    play.style.flex = narrow ? '1 1 100%' : '0 0 auto'; copy.style.flex = more.style.flex = help.style.flex = narrow ? '1 1 auto' : '0 0 auto';
   };
   layout(); addEventListener('resize', layout);
 

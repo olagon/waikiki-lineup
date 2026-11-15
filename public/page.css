@@ -1,0 +1,24 @@
+/* The two reading pages (About, How to play). Same palette as the game's own panels. */
+body{margin:0;background:#0b2a3a;color:#f4efe6;font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:680px;margin:0 auto;padding:40px 20px 56px}
+h1{font-size:28px;font-weight:600;line-height:1.2;margin:0 0 6px}
+h2{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#ffc46b;margin:38px 0 8px;scroll-margin-top:16px}
+p,ul,ol{margin:0 0 12px}
+ul,ol{padding-left:22px}
+li{margin:5px 0}
+a{color:#ffc46b;text-underline-offset:3px}
+img{display:block;width:100%;height:auto;border-radius:14px;margin:16px 0 18px;background:#0e3447}
+kbd{font:600 13px ui-sans-serif,system-ui;padding:2px 7px;border-radius:6px;background:rgba(244,239,230,.14);white-space:nowrap}
+table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:15px}
+th,td{text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid rgba(244,239,230,.14);vertical-align:top}
+th{font-size:13px;font-weight:600;letter-spacing:.04em;opacity:.75}
+.scroll{overflow-x:auto}
+.lead{font-size:18px;opacity:.92}
+.tip{margin:12px 0 14px;padding:12px 16px;border-radius:12px;background:rgba(255,196,107,.1);border-left:3px solid #ffc46b}
+.tip b{color:#ffc46b}
+.play{display:inline-block;margin:6px 10px 0 0;padding:12px 28px;border-radius:999px;background:#ffc46b;color:#0b2a3a;font-weight:600;text-decoration:none}
+.ghost{background:rgba(244,239,230,.12);color:#f4efe6}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:18px 0 4px;font-size:14px}
+nav a{color:inherit;opacity:.85}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid rgba(244,239,230,.18);font-size:14px;opacity:.85;display:flex;flex-wrap:wrap;gap:6px 16px}
+footer a{color:inherit;white-space:nowrap}

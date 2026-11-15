@@ -39,7 +39,7 @@ Open http://localhost:5173. Add `?offline` to play with no server.
 | Emotes | hold Q | D-pad up | |
 | Roster | hold Tab | Select | |
 
-Escape, or the Menu button, opens settings, where keys can be remapped.
+Escape, or the Menu button, opens settings, where keys can be remapped. The full guide, with tips, is at `/how-to-play.html` ([live](https://surf.actionsmatter.com/how-to-play)).
 
 ## Test
 

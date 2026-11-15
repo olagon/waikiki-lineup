@@ -208,7 +208,11 @@ export function openSettings(onLeave?: () => void): void {
   }
   repaint();
   button('Reset keys', 'margin-top:12px;padding:6px 0;font-size:13px;opacity:.75;border-radius:8px', keys, () => { grab = null; settings.keys = {}; commit(); repaint(); });
-  if (onLeave) button('Back to start screen', `margin-top:18px;${PILL}`, body, onLeave);
+  if (onLeave) {
+    const row = el('div', 'display:flex;flex-wrap:wrap;gap:10px;margin-top:18px', body);
+    button('How to play (new tab)', PILL, row, () => window.open('/how-to-play.html', '_blank', 'noopener'));
+    button('Back to start screen', PILL, row, onLeave);
+  }
 }
 
 // ---- profile editor ----
